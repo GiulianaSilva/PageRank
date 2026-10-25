@@ -1,76 +1,160 @@
-#include <catch2/catch_test_macros.hpp>
-#include <iostream>
+//#include <catch2/catch_test_macros.hpp>
+//#include <iostream>
+//#include "AdjacencyList.h"
+////#include "AdjacencyList.cpp"
+////#include "main.cpp"
+//
+//using namespace std;
+//
+//
+//// You must write 5 unique, meaningful tests for credit on the testing section
+//// of this project!
+////My 5 Test cases Below
+//
+//
+////tests all nodes pointing to same website
+//TEST_CASE("Case1", "[flag]") {
+//
+//    AdjacencyList* testList1 = new AdjacencyList();
+//
+//
+//    testList1->insertEdge("google.com", "maps.com");
+//    testList1->insertEdge("facebook.com", "maps.com");
+//    testList1->insertEdge("ufl.edu", "maps.com");
+//    testList1->insertEdge("gmail.com", "maps.com");
+//    testList1->insertEdge("maps.com", "maps.com");
+//
+//
+//
+//    int power_iterations = 2;
+//    testList1->PageRank(power_iterations);
+//
+//
+//    std::string actualOutput = testList1->PageRank(power_iterations);
+//
+//
+//    std::string expectedOutput = R"(facebook.com 0.00
+//gmail.com 0.00
+//google.com 0.00
+//maps.com 1.00
+//ufl.edu 0.00
+//)";
+//
+//
 
-// change if you choose to use a different header name
-#include "AdjacencyList.h"
+//
+//    REQUIRE(actualOutput == expectedOutput);
+//}
+//
+////tests 100 power iterations
+//TEST_CASE("Case2", "[flag]") {
+//
+//    AdjacencyList* testList2 = new AdjacencyList();
+//
+//
+//    testList2->insertEdge("google.com", "apple.com");
+//    testList2->insertEdge("pcbuildinguf.com", "google.com");
+//    testList2->insertEdge("youtube.com", "instagram.com");
+//    testList2->insertEdge("google.com", "pcbuildinguf.com");
+//    testList2->insertEdge("pcbuildinguf.com", "youtube.com");
+//    testList2->insertEdge("instagram.com", "google.com");
+//    testList2->insertEdge("google.com", "ufl.edu");
+//    testList2->insertEdge("youtube.com", "disney.com");
+//    testList2->insertEdge("disney.com", "ufl.edu");
+//
+//
+//    int power_iterations = 100;
+//    testList2->PageRank(power_iterations);
+//
+//
+//    std::string actualOutput = testList2->PageRank(power_iterations);
+//
+//
+//    std::string expectedOutput = R"(apple.com 0.00
+//disney.com 0.00
+//google.com 0.00
+//instagram.com 0.00
+//pcbuildinguf.com 0.00
+//ufl.edu 0.00
+//youtube.com 0.00
+//)";
+//
+//
+//
+//    REQUIRE(actualOutput == expectedOutput);
+//}
+//
+////testing one input
+//TEST_CASE("Case3", "[flag]") {
+//
+//    AdjacencyList* testList3 = new AdjacencyList();
+//
+//
+//    testList3->insertEdge("google.com", "google.com");
+//
+//    int power_iterations = 2;
+//    testList3->PageRank(power_iterations);
+//
+//    std::string actualOutput = testList3->PageRank(power_iterations);
+//
+//
+//    std::string expectedOutput = R"(google.com 1.00
+//)";
+//
 
-using namespace std;
+//
+//    REQUIRE(actualOutput == expectedOutput);
+//}
+//
+////Testing one node pointing to 3 other nodes
+//TEST_CASE("Case4", "[flag]") {
+//
+//    AdjacencyList* testList4 = new AdjacencyList();
+//
+//    testList4->insertEdge("apple.com", "google.com");
+//    testList4->insertEdge("apple.com", "ufl.edu");
+//    testList4->insertEdge("apple.com", "costco.com");
+//
+//    int power_iterations = 2;
+//    testList4->PageRank(power_iterations);
+//
+//
+//    std::string actualOutput = testList4->PageRank(power_iterations);
+//
+//    std::string expectedOutput = R"(apple.com 0.00
+//costco.com 0.08
+//google.com 0.08
+//ufl.edu 0.08)";
+//
 
-// the syntax for defining a test is below. It is important for the name to be
-// unique, but you can group multiple tests with [tags]. A test can have
-// [multiple][tags] using that syntax.
-TEST_CASE("Example Test Name - Change me!", "[tag]") {
-  // instantiate any class members that you need to test here
-  int one = 1;
+//    REQUIRE(actualOutput == expectedOutput);
+//}
+//
+////Test a Cycle graph. All pages should have an equal page rank in a cycle.
+//TEST_CASE("Case5", "[flag]") {
+//
+//    AdjacencyList* testList5 = new AdjacencyList();
+//
+//
+//    testList5->insertEdge("apple.com", "google.com");
+//    testList5->insertEdge("google.com", "ufl.edu");
+//    testList5->insertEdge("ufl.edu", "costco.com");
+//    testList5->insertEdge("costco.com", "youtube.com");
+//    testList5->insertEdge("youtube.com", "apple.com");
+//
+//    int power_iterations = 5;
+//    testList5->PageRank(power_iterations);
+//
+//
+//    std::string actualOutput = testList5->PageRank(power_iterations);
+//
+//    std::string expectedOutput = R"(apple.com 0.20
+//costco.com 0.20
+//google.com 0.20
+//ufl.edu 0.20
+//youtube.com 0.20)";
+//
 
-  // anything that evaluates to false in a REQUIRE block will result in a
-  // failing test
-  REQUIRE(one == 0); // fix me!
-
-  // all REQUIRE blocks must evaluate to true for the whole test to pass
-  REQUIRE(false); // also fix me!
-}
-
-TEST_CASE("Test 2", "[tag]") {
-  // you can also use "sections" to share setup code between tests, for example:
-  int one = 1;
-
-  SECTION("num is 2") {
-    int num = one + 1;
-    REQUIRE(num == 2);
-  };
-
-  SECTION("num is 3") {
-    int num = one + 2;
-    REQUIRE(num == 3);
-  };
-
-  // each section runs the setup code independently to ensure that they don't
-  // affect each other
-}
-
-// You must write 5 unique, meaningful tests for credit on the testing section
-// of this project!
-
-// See the following for an example of how to easily test your output.
-// This uses C++ "raw strings" and assumes your PageRank outputs a string with
-//   the same thing you print.
-TEST_CASE("Example PageRank Output Test", "[flag]") {
-  // the following is a "raw string" - you can write the exact input (without
-  //   any indentation!) and it should work as expected
-  string input = R"(7 2
-google.com gmail.com
-google.com maps.com
-facebook.com ufl.edu
-ufl.edu google.com
-ufl.edu gmail.com
-maps.com facebook.com
-gmail.com maps.com)";
-
-  string expectedOutput = R"(facebook.com 0.20
-gmail.com 0.20
-google.com 0.10
-maps.com 0.30
-ufl.edu 0.20
-)";
-
-  string actualOutput;
-
-  // somehow pass your input into your AdjacencyList and parse it to call the
-  // correct functions, for example:
-  //  AdjacencyList g;
-  //  g.parseInput(input)
-  //  actualOutput = g.getStringRepresentation()
-
-  REQUIRE(actualOutput == expectedOutput);
-}
+//
+//    REQUIRE(actualOutput == expectedOutput);
+//}
