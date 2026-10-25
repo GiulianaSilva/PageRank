@@ -1,10 +1,16 @@
 #include <iostream>
+#include <map>
+#include <iomanip>
+#include <vector>
 
 #include "AdjacencyList.h"
 
 using namespace std;
 
 int main() {
+
+    AdjacencyList Graph;
+
     int no_of_lines, power_iterations;
     string from, to;
     cin >> no_of_lines;
@@ -12,8 +18,12 @@ int main() {
     for (int i = 0; i < no_of_lines; i++) {
         cin >> from;
         cin >> to;
-        // Do Something
+        Graph.insertEdge(from, to);
     }
-    //Create a graph object
-    // Created_Graph.PageRank(power_iterations);}
+
+    Graph.PageRank(power_iterations);
+    return 0;
+
 }
+
+
